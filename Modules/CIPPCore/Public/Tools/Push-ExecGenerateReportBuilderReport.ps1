@@ -60,7 +60,8 @@ function Push-ExecGenerateReportBuilderReport {
                     if ($TestResult) {
                         if ($TestResult.TestType -eq 'Custom' -and $TestResult.ResultDataJson -and $TestResult.MarkdownTemplate) {
                             $Block.content = $TestResult.MarkdownTemplate
-                        } elseif ($TestResult.ResultMarkdown) {
+                        }
+                        if (-not $Block.content -and $TestResult.ResultMarkdown) {
                             $Block | Add-Member -NotePropertyName 'content' -NotePropertyValue $TestResult.ResultMarkdown -Force
                         }
                     }
